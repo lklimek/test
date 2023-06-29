@@ -22,7 +22,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if (github.ref_type == 'tag' && !contains(github.ref_name,'-dev')) {
+            if (github.ref_type == 'tag' && !contains(github.ref,'-dev')) {
               return 'tenderdash,stable'
             }
             return github.ref_name
