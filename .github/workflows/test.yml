@@ -25,4 +25,4 @@ jobs:
             if (github.ref_type == 'tag' && !contains(github.ref,'-dev')) {
               return 'tenderdash,stable'
             }
-            return github.ref_name
+            return github.ref
