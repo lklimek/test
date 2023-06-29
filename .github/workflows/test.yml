@@ -1,0 +1,28 @@
+---
+name: Docker
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        type: string
+        description: 'Docker tag'
+        required: false
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Determine TENDERMINT_BUILD_OPTIONS
+        uses: actions/github-script@v6
+        id: TENDERMINT_BUILD_OPTIONS
+        with:
+          result-encoding: string
+          script: |
+            if (github.ref_type == 'tag' && !contains(github.ref_name,'-dev')) {
+              return 'tenderdash,stable'
+            }
+            return 'tenderdash,dev,deadlock'
