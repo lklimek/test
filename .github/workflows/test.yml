@@ -27,7 +27,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            if (github.ref_type == 'tag' && !contains(github.ref,'-dev')) {
+            if (${{ github.ref_type }} == 'tag' && !contains(${{ github.ref_name }},'-dev')) {
               return 'tenderdash,stable'
             }
-            return github.ref
+            return 'tenderdash,dev,deadlock'
