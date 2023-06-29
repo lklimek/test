@@ -16,6 +16,11 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+        
       - name: Determine TENDERMINT_BUILD_OPTIONS
         uses: actions/github-script@v6
         id: TENDERMINT_BUILD_OPTIONS
